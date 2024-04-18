@@ -5,6 +5,21 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [mensajito, setMensajito] = useState('vacio')
+
+  const  mensajepy = () => {
+    fetch('http://127.0.0.1:8000/api')
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data)
+        setMensajito(JSON.stringify(data))
+      })
+
+
+  }
+
+  
+
 
   return (
     <>
@@ -20,6 +35,9 @@ function App() {
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
+        </button>
+        <button onClick={mensajepy}>
+          El mensaje de python es {mensajito}
         </button>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
