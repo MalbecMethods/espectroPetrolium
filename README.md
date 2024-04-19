@@ -10,7 +10,7 @@ y ejecutar servidorweb.py
 
 2. Para el cliente necesitamos escribir: 
 `npm install`
-        y ejecutar:
+   y ejecutar:
 `npm run dev`
 ## Autores
 
