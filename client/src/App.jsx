@@ -1,53 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Login from './components/Login.jsx'
+import Profile from './components/Profile.jsx'
+import Header from './components/Header.jsx'
+import useToken from './components/UseToken.jsx'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [mensajito, setMensajito] = useState('vacio')
-
-  const  mensajepy = () => {
-    fetch('http://127.0.0.1:8000/api')
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data)
-        setMensajito(JSON.stringify(data))
-      })
-
-
-  }
-
-  
-
+  const { token, removeToken, setToken } = useToken();
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <BrowserRouter>
+      <div className="App">
+        <Header token={removeToken}/>
+        {!token && token!=="" &&token!== undefined?  
+        <Login setToken={setToken} />
+        :(
+          <>
+            <Routes>
+              <Route exact path="http://127.0.0.1:5000/profile" element={<Profile token={token} setToken={setToken}/>}></Route>
+            </Routes>
+          </>
+        )}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <button onClick={mensajepy}>
-          El mensaje de python es {mensajito}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

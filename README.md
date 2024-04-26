@@ -2,10 +2,15 @@
 
 ## Instrucciones
 1. Para el server en python necesitamos instalar: 
-`pip install flask` y 
-`pip install flask-cors`
+Crear entorno virtual (recomendado):
+windows: `py -m venv env`, mac/unix: `python3 -m venv env`,
+windows: `.\env\Scripts\activate`, mac/unix: `source env/bin/activate`.
 
-y ejecutar servidorweb.py
+`pip install flask`, 
+`pip install flask-cors,`
+`pip install flask-jwt-extended`
+
+y ejecutar servidorweb.py 
 
 
 2. Para el cliente necesitamos escribir: 
