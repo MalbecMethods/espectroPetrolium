@@ -1,4 +1,4 @@
-![Logo](./client/public/logo_dm.png)
+![Logo](./client/public/images/logo_dm.png)
 
 ## Instrucciones
 1. Para el server en python necesitamos instalar: 
