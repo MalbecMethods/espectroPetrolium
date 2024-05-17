@@ -1,0 +1,25 @@
+.navbar {
+  color: white;
+  display: flex; 
+  justify-content: space-between;
+  top: 100px;
+}
+
+/* Estilo para el logo */
+.navbar-logo {
+  display: flex;
+  align-items: center; /* Alineación vertical del logo */
+  width: 400px;
+  height: 100px;
+}
+
+.navbar-user {
+  display: flex; /* Uso de Flexbox para la alineación */
+  align-items: center; /* Alineación vertical de los elementos */
+}
+
+.icon {
+  margin-left: 10px; /* Margen a la izquierda de los iconos */
+  width: 50px;
+  height: 50px;
+}

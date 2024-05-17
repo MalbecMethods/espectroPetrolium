@@ -5,22 +5,18 @@ export const Index = () => {
     return(
         <>
         <Nav />
-        <div>
-        </div>
-        <div>
-            
-        </div>
+       
         <section>
             <div className="">
 
             </div>
+        </section>
             <div className='container-box'>
                 <div className="box"></div>
                 <div className="box"></div>
                 <div className="box"></div>
                 <div className="box"></div>
             </div>
-        </section>
         </>
     )
 }
