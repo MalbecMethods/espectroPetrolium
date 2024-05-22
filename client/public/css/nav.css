@@ -8,14 +8,15 @@
 /* Estilo para el logo */
 .navbar-logo {
   display: flex;
-  align-items: center; /* Alineación vertical del logo */
-  width: 400px;
-  height: 100px;
+  align-items: center;
+  width: 300px;
+  height: 80px;
+  mix-blend-mode: plus-lighter;
 }
 
 .navbar-user {
   display: flex; /* Uso de Flexbox para la alineación */
-  align-items: center; /* Alineación vertical de los elementos */
+  align-items: center;
 }
 
 .icon {
