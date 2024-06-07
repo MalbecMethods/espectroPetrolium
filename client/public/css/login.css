@@ -8,6 +8,11 @@ body {
   height: 100vh;
 }
 
+header {
+  background: #338ba192 !important;
+  border-radius: 20px;  
+ } 
+
 a {
   color: #92badd;
   display:inline-block;
@@ -36,7 +41,7 @@ h2 {
   justify-content: center;
   width: 100%;
   min-height: 100%;
-  padding: 50px;
+  padding: 100px;
 }
 
 #formContent {

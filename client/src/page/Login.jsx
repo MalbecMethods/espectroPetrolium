@@ -1,13 +1,10 @@
 
-import { Nav } from "../components/Nav.jsx"
 import "../../public/css/login.css"
 import UserIcon from "../../public/images/icon-user.png"
 
 export const Login = () => {
     return (
     <>
-
-    <Nav />
     <div class="wrapper fadeInDown">
         <div id="formContent">
 
