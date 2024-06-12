@@ -2,6 +2,7 @@ body{
   background: rgb(42,97,112);
   background: linear-gradient(180deg, rgba(42,97,112,1) 0%, rgba(82,124,136,1) 38%, rgba(218,218,218,1) 100%);
   margin: 0;
+  background-size: 100% 100%;
 }
 .container-box{
   display: flex;
