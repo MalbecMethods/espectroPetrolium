@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -15,12 +15,16 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import logo from '../../public/images/logo_dm.png'
 import '../../public/css/index.css'
+import { AuthContext } from '../context/AuthContext';
 
 
 const pages = ['Dashboard', 'Maps', 'News'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Account', 'Logout'];
 
 function ResponsiveAppBar() {
+  let { user, logoutUser } = useContext(AuthContext)
+
+  
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -37,6 +41,9 @@ function ResponsiveAppBar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+  const handleLogout = () => {
+    logoutUser();
   };
 
   return (
@@ -154,11 +161,24 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+             {settings.map((setting) => {
+                if (setting === 'Logout') {
+                  return (
+                    <MenuItem key={setting} onClick={() => handleLogout()}>
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                  );
+                }
+                
+                return (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                );
+              })}
+              
+                
+            
             </Menu>
           </Box>
         </Toolbar>

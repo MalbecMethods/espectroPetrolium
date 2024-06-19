@@ -33,12 +33,6 @@ export const Index = () => {
         <Nav />
        
         <section>
-
-            <div className="">
-                <p>You are logged in to the homepage!</p>
-                <p>Name: {profile.first_name} {profile.last_name}</p>
-                <p>Email: {profile.email}</p>
-            </div>
         </section>
             <div className='container-box'>
                 <div className="box"></div>

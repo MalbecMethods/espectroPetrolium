@@ -7,15 +7,12 @@ import { Login } from "./page/Login.jsx";
 import { News } from "./page/News.jsx";
 import { Maps } from "./page/Maps.jsx";
 import { Dashboard } from "./page/Dashboard.jsx";
-import Header from './components/Headers.jsx';
-
 import PrivateRoute from './utils/PrivateRoute.jsx';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
       <AuthProvider>
-        <Header />
         <Routes>
         <Route path="/" element={<PrivateRoute><Index /></PrivateRoute>} />
         <Route path="/login" element={<Login />} />
