@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import { Route, Routes, BrowserRouter, Router } from "react-router-dom";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { AuthProvider } from './context/AuthContext'
 import { Index } from "./page/Index.jsx";
 import { Login } from "./page/Login.jsx";
@@ -18,11 +17,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <AuthProvider>
         <Header />
         <Routes>
-        <Route path="/" element={<PrivateRoute><Index /></PrivateRoute>} />
+        <Route path="/" element={<Index />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
-        <Route path="/news" element={<PrivateRoute><News /></PrivateRoute>} />
-        <Route path="/maps" element={<PrivateRoute><Maps /></PrivateRoute>} />
+        <Route path="/dashboard" element=<Dashboard /> />
+        <Route path="/news" element=<News /> />
+        <Route path="/maps" element=<Maps /> />
       </Routes>
       </AuthProvider>
   </BrowserRouter>
