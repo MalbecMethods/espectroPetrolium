@@ -18,7 +18,7 @@ import '../../public/css/index.css'
 import { AuthContext } from '../context/AuthContext';
 
 
-const pages = ['Dashboard', 'Maps', 'News'];
+const pages = ['Dashboard', 'Maps', 'News', 'List'];
 const settings = ['Profile', 'Account', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -55,7 +55,7 @@ function ResponsiveAppBar() {
             variant="h6"
             noWrap
             component="a"
-            href=""
+            href="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },

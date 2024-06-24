@@ -25,4 +25,38 @@ body{
   mix-blend-mode: plus-lighter;
 }
 
+.seccionIndex{
+  display: flex;
+  align-items: center;
+}
 
+.containerIndex{
+  flex: 1;
+  padding: 30px;
+  text-align: center;
+}
+
+.containerIndex2{
+  flex: 1;
+  padding: 30px;
+}
+
+
+.img-petroleo{
+  border-radius: 20px;
+  opacity: 75%;
+}
+
+.h1-index{
+  color: gray;
+}
+
+.h1Index{
+  color: #F7F8FC;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 4em;
+}
+
+.pIndex{
+  color: #F7F8FC;
+}
