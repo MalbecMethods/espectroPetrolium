@@ -1,7 +1,6 @@
 # Siga los siguientes pasos para usar el servidor
 ## Instala  las dependencias
-    pip install django
-    pip install mysqlclient  
+    pip install -r requierements.txt
 
 ## Crea las tablas necesesarias para ejecutar django
     python manage.py makemigrations 
