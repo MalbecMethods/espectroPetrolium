@@ -1,24 +1,21 @@
 import pandas as pd
 import os
 import random
-import timeit
 
-def txt_to_csv(ruta_archivo):
-    if not os.path.exists(ruta_archivo):
-        print("El archivo no existe")
-        return None
-    else:
+
+def file_to_csv(ruta_archivo, nombre, fecha):
         try:
             print("Intentando crear el archivo CSV")
             # Leer el archivo TXT
             with open(ruta_archivo, 'r') as f:
                 lines = f.readlines()
-
+            
+            carpeta_csv = './datasets/csv'
             # Crear la carpeta "csv" si no existe
-            if not os.path.exists('csv'):
-                os.makedirs('csv')
+            if not os.path.exists(carpeta_csv):
+                os.makedirs(carpeta_csv)
 
-            nombre_archivo_csv = os.path.join('csv', f'dataset{random.randint(1, 1000)}.csv')
+            nombre_archivo_csv = os.path.join(carpeta_csv, f'{nombre}_{fecha}.csv') if nombre else os.path.join(carpeta_csv, f'{nombre}_{fecha}_{random.randint(1, 1000)}.csv')
             
             with open(nombre_archivo_csv, 'w', newline='') as f:
                 for line in lines:
@@ -34,12 +31,8 @@ def txt_to_csv(ruta_archivo):
                 print(f"Error al analizar el archivo CSV: {e}")
                 return None
 
-            print(f"Se ha creado el archivo CSV en la carpeta 'csv': {nombre_archivo_csv}")
+            print(f"Se ha creado el archivo CSV en la carpeta /datasets/csv: {nombre_archivo_csv}")
             return df
         except Exception as e:
             print(f"Error al leer el archivo TXT: {e}")
 
-ruta_archivo_txt = 'c:/Users/ipfno/Desktop/test dataset/dataset-proyecto/txt/17058_Job 1_14-Mar-23, PL-9, 14-03-23_Points.txt'
-print(timeit.timeit(lambda: txt_to_csv(ruta_archivo_txt), number=1))
-
-print("¡Espero que esta versión te ayude a obtener el CSV deseado en la carpeta 'csv'!")
