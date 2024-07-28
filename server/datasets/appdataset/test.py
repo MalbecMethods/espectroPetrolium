@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 import random
+from datasets.appdataset.upload_data import *
 
 
 def file_to_csv(ruta_archivo, nombre, fecha):
@@ -27,9 +28,12 @@ def file_to_csv(ruta_archivo, nombre, fecha):
             try:
                 df = pd.read_csv(nombre_archivo_csv)
                 print(df)
+                upload_data(nombre_archivo_csv,nombre, fecha)
+
             except pd.errors.ParserError as e:
                 print(f"Error al analizar el archivo CSV: {e}")
                 return None
+
 
             print(f"Se ha creado el archivo CSV en la carpeta /datasets/csv: {nombre_archivo_csv}")
             return df
