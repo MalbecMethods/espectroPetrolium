@@ -6,74 +6,60 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Title from './Title';
+import axios from 'axios';
+import { useEffect } from 'react';
+
 
 // Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { id, date, name, shipTo, paymentMethod, amount };
-}
 
-const rows = [
-  createData(
-    0,
-    '16 Mar, 2019',
-    'Elvis Presley',
-    'Tupelo, MS',
-    'VISA ⠀•••• 3719',
-    312.44,
-  ),
-  createData(
-    1,
-    '16 Mar, 2019',
-    'Paul McCartney',
-    'London, UK',
-    'VISA ⠀•••• 2574',
-    866.99,
-  ),
-  createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
-  createData(
-    3,
-    '16 Mar, 2019',
-    'Michael Jackson',
-    'Gary, IN',
-    'AMEX ⠀•••• 2000',
-    654.39,
-  ),
-  createData(
-    4,
-    '15 Mar, 2019',
-    'Bruce Springsteen',
-    'Long Branch, NJ',
-    'VISA ⠀•••• 5919',
-    212.79,
-  ),
-];
+function createData(id, fecha_registro, time , pressure, temperature, depth, pozo) {
+  return { id, fecha_registro, time, pressure, temperature, depth, pozo };
+}
 
 function preventDefault(event) {
   event.preventDefault();
 }
 
 export default function Orders() {
+
+  const [rows, setRows] = React.useState([]);
+  
+
+
+  useEffect(() => {
+    axios.get('http://127.0.0.1:8000/datasets/api/')
+      .then((response) => {
+        setRows(response.data.map((item) => createData(item.id, item.fecha_registro, item.time, item.pressure, item.temperature, item.depth, item.pozo)));
+      })
+      .catch((error) => {
+        console.log(error);
+      });;
+  }, []);
   return (
     <React.Fragment>
-      <Title>Recent Orders</Title>
+      <Title>Registros Recientes</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
+            <TableCell>id</TableCell>
+            <TableCell>Fecha del registro</TableCell>
+            <TableCell>Tiempo</TableCell>
+            <TableCell>Presion</TableCell>
+            <TableCell>Temperatura</TableCell>
+            <TableCell>Profundidad</TableCell>
+            <TableCell>Pozo</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{`$${row.amount}`}</TableCell>
+              <TableCell>{row.id}</TableCell>
+              <TableCell>{row.fecha_registro}</TableCell>
+              <TableCell>{row.time}</TableCell>
+              <TableCell>{row.pressure}</TableCell>
+              <TableCell>{row.temperature}</TableCell>
+              <TableCell>{row.depth}</TableCell>
+              <TableCell>{row.pozo}</TableCell>
             </TableRow>
           ))}
         </TableBody>
