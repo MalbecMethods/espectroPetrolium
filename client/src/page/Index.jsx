@@ -51,6 +51,12 @@ export const Index = () => {
     const [nombrePozo, setNombrePozo] = useState('');
     const [fechaSubida, setFechaSubida] = useState('');
     const [file, setFile] = useState(null);
+    const [time, setTime] = useState('');
+    const [pressure, setPressure] = useState('');
+    const [temperature, setTemperature] = useState('');
+    const [depth, setDepth] = useState('');
+
+
 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
@@ -92,6 +98,54 @@ export const Index = () => {
             });
         }
     };
+
+    const handleSubmitManual = async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('nombre', nombrePozo);  // Añadir nombre al FormData
+        formData.append('fecha', fechaSubida);  // Añadir fecha al FormData
+        formData.append('time', time);
+        formData.append('pressure', pressure);
+        formData.append('temperature', temperature);
+        formData.append('depth', depth);
+
+
+
+        try {
+            const response = await axios.post('http://localhost:8000/datasets/senddata/', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            console.log(response.data);
+            const nuevoPozo = { nombre: nombrePozo, fecha: fechaSubida };
+            setPozos([...pozos, nuevoPozo]);
+            setNombrePozo('');
+            setFechaSubida('');
+            setTime('');
+            setPressure('');
+            setTemperature('');
+            setDepth('');
+
+            Swal.fire({
+                title: 'Éxito!',
+                text: 'Se registraron los datos correctamente.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+            console.log(response.data);
+        } catch (error) {
+            console.error('Error subiendo datos:', error);
+            Swal.fire({
+                title: 'Error',
+                text: 'Hubo un error al registrar los datos.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+    }
+
+
 
     return (
         <>
@@ -139,6 +193,11 @@ export const Index = () => {
                                                 Subir archivo
                                                 <VisuallyHiddenInput type="file" onChange={handleFileChange} />
                                             </Button>
+
+                                            <br />
+                                            <br />
+
+                                            <button type="button" className="btn-link"  data-toggle="modal" data-target="#formularioManual" data-whatever="@fat">Prefieres subir un registro manualmente?</button>
                                             <br />
                                             <br />
                                             <button type="submit" className="btn btn-primary btn-lg btn-block">Enviar datos</button>
@@ -148,6 +207,93 @@ export const Index = () => {
                             </div>
                         </div>
                     </div>
+
+                    <div>
+                        <div className="modal fade" id="formularioManual" tabindex="-1" role="dialog" aria-labelledby="formularioManualLabel" aria-hidden="true">
+                            <div className="modal-dialog" role="document">
+                                <div className="modal-content">
+                                    <div className="modal-body">
+                                        <h1 className="h1-index">Registro de datos</h1>
+                                        <form onSubmit={handleSubmitManual}>
+                                            <div className="form-group">
+                                                <label htmlFor="recipient-name" className="col-form-label">Nombre del pozo:</label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    id="recipient-name"
+                                                    value={nombrePozo}
+                                                    onChange={(e) => setNombrePozo(e.target.value)}
+                                                />
+                                            </div>
+                                            <div className="form-group">
+                                                <label htmlFor="message-text" className="col-form-label">Fecha de subida:</label>
+                                                <input
+                                                    type="date"
+                                                    className="form-control"
+                                                    id="recipient-name"
+                                                    value={fechaSubida}
+                                                    onChange={(e) => setFechaSubida(e.target.value)}
+                                                />
+                                            </div>
+                                            <div className="form-group">
+                                                <label htmlFor="recipient-name" className="col-form-label">Tiempo:</label>
+                                                <br/>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    id="recipient-name"
+                                                    value={time}
+                                                    onChange={(e) => setTime(e.target.value)}
+                                                />
+                                            </div>
+                                            <div className="form-group">
+                                                <label htmlFor="recipient-name" className="col-form-label">Presion:</label>
+                                                <br/>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    id="recipient-name"
+                                                    value={pressure}
+                                                    onChange={(e) => setPressure(e.target.value)}
+                                                />
+                                            </div>
+                                            <div className="form-group">
+                                                <label htmlFor="recipient-name" className="col-form-label">Temperatura:</label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    id="recipient-name"
+                                                    value={temperature}
+                                                    onChange={(e) => setTemperature(e.target.value)}
+                                                />
+                                            </div>
+                                            <div className="form-group">
+                                                <label htmlFor="recipient-name" className="col-form-label">Profundidad:</label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    id="recipient-name"
+                                                    value={depth}
+                                                    onChange={(e) => setDepth(e.target.value)}
+                                                />
+                                            </div>
+                                            <br />
+                                            <button type="submit" className="btn btn-primary btn-lg btn-block">Enviar datos</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
 
                 </div>
                 <div className="containerIndex2">

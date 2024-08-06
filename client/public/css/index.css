@@ -60,3 +60,19 @@ body{
 .pIndex{
   color: #F7F8FC;
 }
+
+.btn-link{
+  color: rgb(138, 138, 138);
+  border: none;
+}
+.btn-link:hover{
+  color: black;
+  cursor: pointer;
+
+}
+
+.btn-link:focus{
+  color: black;
+  border: none;
+}
+

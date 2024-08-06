@@ -46,3 +46,33 @@ def get_datasets(request):
             return JsonResponse({'message': 'No se encontraron conjuntos de datos'}, status=404)
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
+
+
+@api_view(['POST'])
+@parser_classes([MultiPartParser, FormParser])
+def send_data(request):
+
+    nombre = request.data.get('nombre')
+    fecha = request.data.get('fecha')
+    time = request.data.get('time')
+    pressure = request.data.get('pressure')
+    temperature = request.data.get('temperature')
+    depth = request.data.get('depth')
+    
+    if not pressure or not temperature or not depth:
+        return JsonResponse({'error': 'Presión, temperatura y profundidad son requeridos'}, status=400)
+    
+    if not nombre or not fecha:
+        return JsonResponse({'error': 'Nombre y fecha son requeridos'}, status=400)
+    
+    Dataset.objects.create(
+        time=time,
+        pressure=pressure,
+        temperature=temperature,
+        depth=depth,
+        fecha_registro=fecha,
+        pozo=nombre
+    )
+
+
+    return JsonResponse({'message': 'Archivo subido exitosamente'})
