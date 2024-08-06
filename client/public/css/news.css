@@ -1,0 +1,34 @@
+/* News.css */
+
+.news-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .news-card {
+    width: 300px;
+    margin: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.329);
+    padding: 10px;
+    color: black;
+  }
+  
+  .news-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .news-description {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+  
+  .read-more-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  

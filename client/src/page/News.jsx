@@ -1,38 +1,50 @@
-import React, { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Nav from '../components/Nav.jsx'
+import Nav from '../components/Nav.jsx';
+import '../../public/css/news.css'; 
 
 export const News = () => {
-  const [articles, setArticles] = useState([]);
+  const [noticias, setNoticias] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const getNews = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get('https://newsapi.org/v2/top-headlines?country=ar&category=business&apiKey=1c653f892601429b9a755d2fc7043df6');
-        setArticles(response.data.articles);
+        const response = await axios.get('../../public/data/news.json'); // Cambia la ruta al archivo JSON según donde lo tengas ubicado
+        if (Array.isArray(response.data.noticias)) {
+          setNoticias(response.data.noticias);
+        } else {
+          setError('La respuesta del archivo JSON no es un array válido.');
+        }
       } catch (error) {
-        console.error(`Hubo un error al obtener las noticias: ${error}`);
+        console.error('Error al obtener los datos:', error);
+        setError('Hubo un problema al cargar los datos desde el archivo JSON.');
       }
     };
-
-    getNews();
+    fetchData();
   }, []);
 
-return (
+  if (error) {
+    return <p>{error}</p>;
+  }
+
+  return (
     <>
-    <Nav />
-    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
-      {articles.map((article, index) => (
-        <div key={index} style={{ width: '300px', margin: '20px', border: '1px solid black', borderRadius: '10px', backgroundColor:'white' }}>
-          <div style={{ padding: '10px', color:'black'}}>
-            <h2>{article.title}</h2>
-            <p>{article.description}</p>
-            <a href={article.url}>Leer más</a>
+      <Nav />
+      <div className="news-container">
+        {noticias.map((noticia) => (
+          <div key={noticia.titulo} className="news-card">
+            <img src={noticia.imagen} alt={noticia.titulo} className="news-image" style={{ width: '100%' }} />
+            <div className="news-details">
+              <h2 className="news-title">{noticia.titulo}</h2>
+              <p className="news-date">{noticia.fecha}</p>
+              <a className="read-more-link" href={noticia.url}>
+                Leer más
+              </a>
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
     </>
   );
 };
-

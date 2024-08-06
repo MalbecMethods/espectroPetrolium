@@ -18,7 +18,7 @@ import '../../public/css/index.css'
 import { AuthContext } from '../context/AuthContext';
 
 
-const pages = ['Dashboard', 'Maps', 'News', 'List'];
+const pages = ['Dashboard', 'Maps', 'List', 'News'];
 const settings = ['Profile', 'Account', 'Logout'];
 
 function ResponsiveAppBar() {

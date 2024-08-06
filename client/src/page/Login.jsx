@@ -1,8 +1,7 @@
-
 import "../../public/css/login.css"
 import UserIcon from "../../public/images/icon-user.png"
 import { AuthContext } from '../context/AuthContext.jsx'
-import React,{ useContext } from 'react'
+import { useContext } from 'react'
 
 export const Login = () => {
     let {loginUser} = useContext(AuthContext)
