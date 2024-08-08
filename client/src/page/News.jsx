@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Nav from '../components/Nav.jsx';
-import '../../public/css/news.css'; 
+import '../../public/css/news.css';
+import Fondo from '../components/Fondo.jsx'
 
 export const News = () => {
   const [noticias, setNoticias] = useState([]);
@@ -30,6 +31,7 @@ export const News = () => {
 
   return (
     <>
+      <Fondo />
       <Nav />
       <div className="news-container">
         {noticias.map((noticia) => (

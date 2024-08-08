@@ -1,13 +1,17 @@
-import  Nav  from "../components/Nav.jsx"
-import '../../public/css/index.css'
-import Leaflet from "../components/Leaflet.jsx";
+import React, { useEffect } from 'react';
+import Nav from '../components/Nav'; // Asegúrate de importar tu componente Nav
+import Leaflet from '../components/Leaflet';
+import Fondo from '../components/Fondo.jsx'
 
 export const Maps = () => {
-    return(
-        <>
+    
+
+    return (
+        <>  
+            <Fondo />
             <Nav />
             <h1>Ubicación de Yacimientos</h1>
             <Leaflet />
         </>
-    )
-}
+    );
+};

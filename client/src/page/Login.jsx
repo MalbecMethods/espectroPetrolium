@@ -2,12 +2,13 @@ import "../../public/css/login.css"
 import UserIcon from "../../public/images/icon-user.png"
 import { AuthContext } from '../context/AuthContext.jsx'
 import { useContext } from 'react'
+import Fondo from '../components/Fondo.jsx'
 
 export const Login = () => {
     let {loginUser} = useContext(AuthContext)
     return (
     <>
-
+    <Fondo />
     <div className="wrapper fadeInDown">
         <div id="formContent">
 

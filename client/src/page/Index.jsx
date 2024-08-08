@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import axios from "axios";
 import Swal from 'sweetalert2';
+import Fondo from '../components/Fondo.jsx'
 
 
 const VisuallyHiddenInput = styled('input')({
@@ -149,6 +150,7 @@ export const Index = () => {
 
     return (
         <>
+            <Fondo />
             <Nav />
             <section className="seccionIndex">
                 <div className="containerIndex">
@@ -285,13 +287,6 @@ export const Index = () => {
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-
-
 
 
 

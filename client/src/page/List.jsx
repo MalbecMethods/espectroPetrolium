@@ -2,6 +2,7 @@ import  Nav  from "../components/Nav.jsx"
 import '../../public/css/index.css'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Fondo from '../components/Fondo.jsx'
 
 export const List = () => {
   const [pozos, setPozos] = useState([]);
@@ -30,6 +31,7 @@ export const List = () => {
 
   return (
     <>
+      <Fondo />
       <Nav />
       <h1>Mis pozos</h1>
       <ul>

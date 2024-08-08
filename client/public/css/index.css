@@ -37,14 +37,12 @@ body{
 }
 
 .containerIndex2{
-  flex: 1;
   padding: 30px;
 }
 
 
 .img-petroleo{
   border-radius: 20px;
-  opacity: 75%;
 }
 
 .h1-index{
