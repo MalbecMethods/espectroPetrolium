@@ -33,14 +33,15 @@ export const News = () => {
     <>
       <Fondo />
       <Nav />
+      <h1>Noticias de Hidrocarburos</h1>
       <div className="news-container">
         {noticias.map((noticia) => (
           <div key={noticia.titulo} className="news-card">
-            <img src={noticia.imagen} alt={noticia.titulo} className="news-image" style={{ width: '100%' }} />
+            <img src={noticia.imagen} alt={noticia.titulo} className="news-image" style={{ width: '100%', borderRadius: '10px' }} />
             <div className="news-details">
               <h2 className="news-title">{noticia.titulo}</h2>
               <p className="news-date">{noticia.fecha}</p>
-              <a className="read-more-link" href={noticia.url}>
+              <a className="read-more-link" href="/">
                 Leer más
               </a>
             </div>

@@ -4,14 +4,17 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    background-color: rgba(248, 248, 248, 0.932);
+    width: 98%;
+    height: 100%;
+    border-radius: 10px;
   }
   
   .news-card {
-    width: 300px;
+    width: 330px;
     margin: 20px;
-    border: 1px solid black;
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.329);
+    background-color: rgba(248, 248, 248, 0.932);
     padding: 10px;
     color: black;
   }
@@ -19,6 +22,7 @@
   .news-title {
     font-size: 1.2rem;
     font-weight: bold;
+    color: rgb(34, 33, 33);
   }
   
   .news-description {
@@ -27,7 +31,7 @@
   }
   
   .read-more-link {
-    color: #007bff;
+    color: #0164cd !important;
     text-decoration: none;
     font-weight: bold;
   }

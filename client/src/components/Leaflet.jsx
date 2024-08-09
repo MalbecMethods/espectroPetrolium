@@ -1,98 +1,78 @@
-import "../../public/css/maps.css"
+import React, { useState } from "react";
+import "../../public/css/maps.css";
 import "leaflet/dist/leaflet.css";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
+import L from "leaflet";
 import customIconUrl from "../../public/images/descargar.png";
 
-import { Icon, divIcon, point } from "leaflet";
-
-// create custom icon
-const customIcon = new Icon({
-  // iconUrl: "https://cdn-icons-png.flaticon.com/512/447/447031.png",
+const customIcon = new L.Icon({
   iconUrl: customIconUrl,
-  iconSize: [38, 38] // size of the icon
+  iconSize: [38, 38],
 });
 
-// custom cluster icon
-const createClusterCustomIcon = function (cluster) {
-  return new divIcon({
+const createClusterCustomIcon = (cluster) => {
+  return new L.DivIcon({
     html: `<span class="cluster-icon">${cluster.getChildCount()}</span>`,
     className: "custom-marker-cluster",
-    iconSize: point(33, 33, true)
+    iconSize: L.point(33, 33, true),
   });
 };
 
-// markers
-const markers = [
-  {
-    id: 1,
-    geocode: [-26.115725, -58.228746],
-    popUp: "Pozo1 "
-  },
-  {
-    id: 2,
-    geocode: [-23.203471, -62.067059],
-    popUp: "Pozo2 Surubí Proa"
-  },
-  {
-    id: 3,
-    geocode: [-23.187286, -62.043160],
-    popUp: "Pozo3 Palmar Largo"
-  },
-  {
-    id: 4,
-    geocode: [-23.192373, -62.042350],
-    popUp: "Pozo4 Palmar Largo"
-  }
-];
+const InteractiveMap = () => {
+  const [markers, setMarkers] = useState([]);
 
-export default function Leaflet() {
+  // Custom hook to handle map clicks
+  const MapClickHandler = () => {
+    useMapEvents({
+      click(e) {
+        const newMarker = {
+          id: markers.length + 1,
+          geocode: [e.latlng.lat, e.latlng.lng],
+          popUp: `Nuevo Pozo ${markers.length + 1}`,
+        };
+        setMarkers([...markers, newMarker]);
+      },
+    });
+    return null;
+  };
+
   return (
-    <MapContainer center={[-26.184436, -58.174344]} zoom={13}>
-      {/* OPEN STREEN MAPS TILES */}
+    <MapContainer
+      center={[-26.185157, -58.175474]}
+      zoom={12}
+      style={{ height: "550px", width: "90%" }}
+    >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {/* WATERCOLOR CUSTOM TILES */}
-      {/* <TileLayer
-        attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg"
-      /> */}
-      {/* GOOGLE MAPS TILES */}
-      {/* <TileLayer
-        attribution="Google Maps"
-        // url="http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}" // regular
-        // url="http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}" // satellite
-        url="http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}" // terrain
-        maxZoom={20}
-        subdomains={["mt0", "mt1", "mt2", "mt3"]}
-      /> */}
+
+      <MapClickHandler />
 
       <MarkerClusterGroup
         chunkedLoading
         iconCreateFunction={createClusterCustomIcon}
       >
-        {/* Mapping through the markers */}
         {markers.map((marker) => (
-        <Marker key={marker.id} position={marker.geocode} icon={customIcon}>
-            <Popup>{marker.popUp}</Popup>
-        </Marker>
+          <Marker key={marker.id} position={marker.geocode} icon={customIcon}>
+            <Popup>
+              <input
+                type="text"
+                defaultValue={marker.popUp}
+                onBlur={(e) => {
+                  const updatedMarkers = markers.map((m) =>
+                    m.id === marker.id ? { ...m, popUp: e.target.value } : m
+                  );
+                  setMarkers(updatedMarkers);
+                }}
+              />
+            </Popup>
+          </Marker>
         ))}
-
-
-        {/* Hard coded markers */}
-        {/* <Marker position={[51.505, -0.09]} icon={customIcon}>
-          <Popup>This is popup 1</Popup>
-        </Marker>
-        <Marker position={[51.504, -0.1]} icon={customIcon}>
-          <Popup>This is popup 2</Popup>
-        </Marker>
-        <Marker position={[51.5, -0.09]} icon={customIcon}>
-          <Popup>This is popup 3</Popup>
-        </Marker>
-       */}
       </MarkerClusterGroup>
     </MapContainer>
   );
-}
+};
+
+export default InteractiveMap;

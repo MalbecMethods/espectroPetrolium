@@ -5,6 +5,10 @@ import os
 from datasets.models import Dataset
 from .serializers import DatasetSerializer
 from datasets.appdataset.test import file_to_csv
+from rest_framework import generics
+from datasets.models import Dataset
+from .serializers import DatasetSerializer
+
 
 @api_view(['POST'])
 @parser_classes([MultiPartParser, FormParser])
@@ -76,3 +80,8 @@ def send_data(request):
 
 
     return JsonResponse({'message': 'Archivo subido exitosamente'})
+
+class DatasetDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Dataset.objects.all()
+    serializer_class = DatasetSerializer
+    lookup_field = 'id'

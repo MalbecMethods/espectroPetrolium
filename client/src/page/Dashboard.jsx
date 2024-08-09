@@ -44,7 +44,7 @@ export const Dashboard = () => {
             <Fondo />
             <Nav />
             
-            <h1 className='h1dashboard'>Dashboard</h1>
+
             <div className="divPrincipal">
                 <div className="div1" >
                 <Orders />

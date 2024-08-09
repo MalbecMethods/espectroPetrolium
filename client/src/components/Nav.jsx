@@ -18,8 +18,8 @@ import '../../public/css/index.css'
 import { AuthContext } from '../context/AuthContext';
 
 
-const pages = ['Dashboard', 'Maps', 'List', 'News'];
-const settings = ['Profile', 'Account', 'Logout'];
+const pages = ['Dashboard', 'List', 'Maps', 'News'];
+const settings = ['Logout'];
 
 function ResponsiveAppBar() {
   let { user, logoutUser } = useContext(AuthContext)
