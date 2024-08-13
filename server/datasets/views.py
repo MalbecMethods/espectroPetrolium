@@ -8,6 +8,8 @@ from datasets.appdataset.test import file_to_csv
 from rest_framework import generics
 from datasets.models import Dataset
 from .serializers import DatasetSerializer
+from datasets.news.web import traer_noticias
+
 
 
 @api_view(['POST'])
@@ -85,3 +87,13 @@ class DatasetDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Dataset.objects.all()
     serializer_class = DatasetSerializer
     lookup_field = 'id'
+
+
+
+
+@api_view(['GET'])
+def get_news(request):
+    try:
+        return JsonResponse({"noticias": traer_noticias()}, status=200)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
